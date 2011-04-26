@@ -46,6 +46,9 @@
 	//     type: what its type is, a standard MIME type  (NSString)
 	NSArray *enclosures;
 
+    NSDictionary *contentAttributes; // Content attributes (type, src etc)
+	NSURL *thumbnailURL; // URL to thumbnail image (if available)
+    NSNumber *recommendationsCount; // Helios specific tag
 }
 
 @property (nonatomic, copy) NSString *identifier;
@@ -56,5 +59,9 @@
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSArray *enclosures;
+
+@property (nonatomic, copy) NSDictionary *contentAttributes;
+@property (nonatomic, copy) NSURL *thumbnailURL;
+@property (nonatomic, copy) NSNumber *recommendationsCount;
 
 @end

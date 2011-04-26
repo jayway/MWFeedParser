@@ -34,6 +34,7 @@
 @implementation MWFeedItem
 
 @synthesize identifier, title, link, date, updated, summary, content, enclosures;
+@synthesize contentAttributes, thumbnailURL, recommendationsCount;
 
 #pragma mark NSObject
 
@@ -55,13 +56,17 @@
 	[summary release];
 	[content release];
 	[enclosures release];
+
+    [contentAttributes release];
+	[thumbnailURL release];
+    [recommendationsCount release];
 	[super dealloc];
 }
 
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		identifier = [[decoder decodeObjectForKey:@"identifier"] retain];
 		title = [[decoder decodeObjectForKey:@"title"] retain];
 		link = [[decoder decodeObjectForKey:@"link"] retain];
@@ -70,6 +75,10 @@
 		summary = [[decoder decodeObjectForKey:@"summary"] retain];
 		content = [[decoder decodeObjectForKey:@"content"] retain];
 		enclosures = [[decoder decodeObjectForKey:@"enclosures"] retain];
+
+        contentAttributes = [[decoder decodeObjectForKey:@"contentAttributes"] retain];
+		thumbnailURL = [[decoder decodeObjectForKey:@"thumbnailURL"] retain];
+        recommendationsCount = [[decoder decodeObjectForKey:@"recommendationsCount"] retain];
 	}
 	return self;
 }
@@ -83,6 +92,10 @@
 	if (summary) [encoder encodeObject:summary forKey:@"summary"];
 	if (content) [encoder encodeObject:content forKey:@"content"];
 	if (enclosures) [encoder encodeObject:enclosures forKey:@"enclosures"];
+
+    if (contentAttributes) [encoder encodeObject:contentAttributes forKey:@"contentAttributes"];
+	if (thumbnailURL) [encoder encodeObject:thumbnailURL forKey:@"thumbnailURL"];
+    if (recommendationsCount) [encoder encodeObject:recommendationsCount forKey:@"recommendationsCount"];
 }
 
 @end
