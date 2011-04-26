@@ -59,7 +59,7 @@
 #pragma mark NSObject
 
 - (id)init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 
 		// Defaults
 		feedParseType = ParseTypeFull;
@@ -83,7 +83,7 @@
 // Initialise with a URL
 // Mainly for historic reasons before -parseURL:
 - (id)initWithFeedURL:(NSURL *)feedURL {
-	if (self = [self init]) {
+	if ((self = [self init])) {
 		
 		// Check if an string was passed as old init asked for NSString not NSURL
 		if ([feedURL isKindOfClass:[NSString class]]) {
@@ -629,6 +629,8 @@
 					if ([currentPath isEqualToString:@"/rss/channel/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/rss/channel/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/rss/channel/link"]) { if (processedText.length > 0) info.link = processedText; processed = YES; }
+					else if ([currentPath isEqualToString:@"/rss/channel/lastBuildDate"]) { if (processedText.length > 0) info.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; processed = YES; }
+					else if ([currentPath isEqualToString:@"/rss/channel/pubDate"]) { if (processedText.length > 0 && !info.updated) info.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; processed = YES; }
 				}
 				
 				break;
@@ -651,6 +653,7 @@
 					if ([currentPath isEqualToString:@"/rdf:RDF/channel/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/rdf:RDF/channel/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/rdf:RDF/channel/link"]) { if (processedText.length > 0) info.link = processedText; processed = YES; }
+					else if ([currentPath isEqualToString:@"/rdf:RDF/channel/dc:date"]) { if (processedText.length > 0) info.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
 				}
 				
 				break;
@@ -663,9 +666,25 @@
 					else if ([currentPath isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/content"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
+                    // Using currentText to keep formatting in <pre> tags
+					else if ([currentPath isEqualToString:@"/feed/entry/content"]) {
+						if (currentText.length > 0) {
+							item.content = currentText; 
+						}
+						item.contentAttributes = currentElementAttributes;
+						processed = YES;
+					}
 					else if ([currentPath isEqualToString:@"/feed/entry/published"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/updated"]) { if (processedText.length > 0) item.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
+					else if ([currentPath isEqualToString:@"/feed/entry/media:thumbnail"]) {                        
+						item.thumbnailURL = [NSURL URLWithString:[currentElementAttributes objectForKey:@"url"]];
+						processed = YES;
+					}
+                    else if ([currentPath isEqualToString:@"/feed/entry/helios:recommendations"]) {
+                        NSInteger countInteger = [[currentElementAttributes objectForKey:@"count"] integerValue];
+                        item.recommendationsCount = [NSNumber numberWithInteger:countInteger];
+                        processed = YES;
+                    }
 				}
 				
 				// Info
@@ -673,6 +692,8 @@
 					if ([currentPath isEqualToString:@"/feed/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:info]; processed = YES;}
+                    else if ([currentPath isEqualToString:@"/feed/icon"]) { if (processedText.length > 0) info.icon = processedText; processed = YES; }
+					else if ([currentPath isEqualToString:@"/feed/updated"]) { if (processedText.length > 0) info.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
 				}
 				
 				break;
