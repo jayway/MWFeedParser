@@ -1,3 +1,7 @@
+Jayway / Helios specific fork of MWFeedParser.
+Static Library to use as Component.
+With added properties on FeedInfo and FeedItem.
+
 # MWFeedParser — An RSS and Atom web feed parser for iOS
 
 MWFeedParser is an Objective-C framework for downloading and parsing RSS (1.* and 2.*) and Atom web feeds. It is a very simple and clean implementation that reads the following information from a web feed:
