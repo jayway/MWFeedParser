@@ -19,20 +19,12 @@
 		4CC89612119F0D0C00ED61B6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89611119F0D0C00ED61B6 /* RootViewController.m */; };
 		A75E46BF1366C22D00AB7DA7 /* libMWFeedParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BA8C791366BD55007A13C7 /* libMWFeedParser.a */; };
 		A7BA8C7A1366BD55007A13C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		A7BA8C811366BEC3007A13C7 /* MWFeedParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC89603119F0CED00ED61B6 /* MWFeedParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7BA8C821366BEC3007A13C7 /* MWFeedParser_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CAA79C911A406890009078E /* MWFeedParser_Private.h */; };
 		A7BA8C831366BEC3007A13C7 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89604119F0CED00ED61B6 /* MWFeedParser.m */; };
-		A7BA8C841366BEC3007A13C7 /* MWFeedInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC89605119F0CED00ED61B6 /* MWFeedInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BA8C851366BEC3007A13C7 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89606119F0CED00ED61B6 /* MWFeedInfo.m */; };
-		A7BA8C861366BEC3007A13C7 /* MWFeedItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC89607119F0CED00ED61B6 /* MWFeedItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BA8C871366BEC3007A13C7 /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89608119F0CED00ED61B6 /* MWFeedItem.m */; };
-		A7BA8C881366BECC007A13C7 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F316120863F800606CFC /* NSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BA8C891366BECC007A13C7 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F317120863F800606CFC /* NSString+HTML.m */; };
-		A7BA8C8A1366BECC007A13C7 /* NSDate+InternetDateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C661F42125E3F2D007F1792 /* NSDate+InternetDateTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BA8C8B1366BECC007A13C7 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C661F43125E3F2D007F1792 /* NSDate+InternetDateTime.m */; };
-		A7BA8C8C1366BECF007A13C7 /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F2E912085ACE00606CFC /* GTMNSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BA8C8D1366BECF007A13C7 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F2EA12085ACE00606CFC /* GTMNSString+HTML.m */; };
-		A7BA8C8E1366BECF007A13C7 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F2FA12085B9200606CFC /* GTMDefines.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,24 +220,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		A7BA8C771366BD55007A13C7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A7BA8C811366BEC3007A13C7 /* MWFeedParser.h in Headers */,
-				A7BA8C821366BEC3007A13C7 /* MWFeedParser_Private.h in Headers */,
-				A7BA8C841366BEC3007A13C7 /* MWFeedInfo.h in Headers */,
-				A7BA8C861366BEC3007A13C7 /* MWFeedItem.h in Headers */,
-				A7BA8C881366BECC007A13C7 /* NSString+HTML.h in Headers */,
-				A7BA8C8A1366BECC007A13C7 /* NSDate+InternetDateTime.h in Headers */,
-				A7BA8C8C1366BECF007A13C7 /* GTMNSString+HTML.h in Headers */,
-				A7BA8C8E1366BECF007A13C7 /* GTMDefines.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* MWFeedParserApp */ = {
 			isa = PBXNativeTarget;
@@ -271,7 +245,6 @@
 			buildPhases = (
 				A7BA8C751366BD55007A13C7 /* Sources */,
 				A7BA8C761366BD55007A13C7 /* Frameworks */,
-				A7BA8C771366BD55007A13C7 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -288,6 +261,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Michael Waterfall";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MWFeedParser" */;
