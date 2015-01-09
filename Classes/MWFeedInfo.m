@@ -33,7 +33,7 @@
 
 @implementation MWFeedInfo
 
-@synthesize title, link, summary;
+@synthesize title, link, summary, url;
 @synthesize icon, updated;
 
 #pragma mark NSObject
@@ -43,27 +43,20 @@
 	if (title)   [string appendFormat:@"“%@”", EXCERPT(title, 50)];
 	//if (link)    [string appendFormat:@" (%@)", link];
 	//if (summary) [string appendFormat:@", %@", MWExcerpt(summary, 50)];
-	return [string autorelease];
+	return string;
 }
 
-- (void)dealloc {
-	[title release];
-	[link release];
-	[summary release];
-	[icon release];
-	[updated release];
-	[super dealloc];
-}
 
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if ((self = [super init])) {
-		title = [[decoder decodeObjectForKey:@"title"] retain];
-		link = [[decoder decodeObjectForKey:@"link"] retain];
-		summary = [[decoder decodeObjectForKey:@"summary"] retain];
-		icon = [[decoder decodeObjectForKey:@"icon"] retain];
-		updated = [[decoder decodeObjectForKey:@"updated"] retain];
+		title = [decoder decodeObjectForKey:@"title"];
+		link = [decoder decodeObjectForKey:@"link"];
+		summary = [decoder decodeObjectForKey:@"summary"];
+		url = [decoder decodeObjectForKey:@"url"];
+		icon = [decoder decodeObjectForKey:@"icon"];
+		updated = [decoder decodeObjectForKey:@"updated"];
 	}
 	return self;
 }
@@ -72,7 +65,8 @@
 	if (title) [encoder encodeObject:title forKey:@"title"];
 	if (link) [encoder encodeObject:link forKey:@"link"];
 	if (summary) [encoder encodeObject:summary forKey:@"summary"];
-    if (icon) [encoder encodeObject:icon forKey:@"icon"];
+	if (url) [encoder encodeObject:url forKey:@"url"];
+	if (icon) [encoder encodeObject:icon forKey:@"icon"];
 	if (updated) [encoder encodeObject:updated forKey:@"updated"];
 }
 

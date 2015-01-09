@@ -33,7 +33,7 @@
 
 @implementation MWFeedItem
 
-@synthesize identifier, title, link, date, updated, summary, content, enclosures;
+@synthesize identifier, title, link, date, updated, summary, content, author, enclosures;
 @synthesize contentAttributes, thumbnailURL, recommendationsCount;
 
 #pragma mark NSObject
@@ -44,41 +44,27 @@
 	if (date)    [string appendFormat:@" - %@", date];
 	//if (link)    [string appendFormat:@" (%@)", link];
 	//if (summary) [string appendFormat:@", %@", EXCERPT(summary, 50)];
-	return [string autorelease];
+	return string;
 }
 
-- (void)dealloc {
-	[identifier release];
-	[title release];
-	[link release];
-	[date release];
-	[updated release];
-	[summary release];
-	[content release];
-	[enclosures release];
-
-    [contentAttributes release];
-	[thumbnailURL release];
-    [recommendationsCount release];
-	[super dealloc];
-}
 
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if ((self = [super init])) {
-		identifier = [[decoder decodeObjectForKey:@"identifier"] retain];
-		title = [[decoder decodeObjectForKey:@"title"] retain];
-		link = [[decoder decodeObjectForKey:@"link"] retain];
-		date = [[decoder decodeObjectForKey:@"date"] retain];
-		updated = [[decoder decodeObjectForKey:@"updated"] retain];
-		summary = [[decoder decodeObjectForKey:@"summary"] retain];
-		content = [[decoder decodeObjectForKey:@"content"] retain];
-		enclosures = [[decoder decodeObjectForKey:@"enclosures"] retain];
+		identifier = [decoder decodeObjectForKey:@"identifier"];
+		title = [decoder decodeObjectForKey:@"title"];
+		link = [decoder decodeObjectForKey:@"link"];
+		date = [decoder decodeObjectForKey:@"date"];
+		updated = [decoder decodeObjectForKey:@"updated"];
+		summary = [decoder decodeObjectForKey:@"summary"];
+		content = [decoder decodeObjectForKey:@"content"];
+		author = [decoder decodeObjectForKey:@"author"];
+		enclosures = [decoder decodeObjectForKey:@"enclosures"];
 
-        contentAttributes = [[decoder decodeObjectForKey:@"contentAttributes"] retain];
-		thumbnailURL = [[decoder decodeObjectForKey:@"thumbnailURL"] retain];
-        recommendationsCount = [[decoder decodeObjectForKey:@"recommendationsCount"] retain];
+        contentAttributes = [decoder decodeObjectForKey:@"contentAttributes"];
+		thumbnailURL = [decoder decodeObjectForKey:@"thumbnailURL"];
+        recommendationsCount = [decoder decodeObjectForKey:@"recommendationsCount"];
 	}
 	return self;
 }
@@ -91,6 +77,7 @@
 	if (updated) [encoder encodeObject:updated forKey:@"updated"];
 	if (summary) [encoder encodeObject:summary forKey:@"summary"];
 	if (content) [encoder encodeObject:content forKey:@"content"];
+	if (author) [encoder encodeObject:author forKey:@"author"];
 	if (enclosures) [encoder encodeObject:enclosures forKey:@"enclosures"];
 
     if (contentAttributes) [encoder encodeObject:contentAttributes forKey:@"contentAttributes"];
